@@ -146,7 +146,7 @@
 
   .eyebrow {
     display: inline-flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 10px;
     color: var(--blue-bright);
     font-size: 11px;
@@ -154,6 +154,7 @@
     text-transform: uppercase;
     font-weight: 500;
     margin-bottom: 28px;
+    text-align: left;
   }
   .eyebrow .dot {
     width: 6px;
@@ -161,29 +162,60 @@
     border-radius: 50%;
     background: var(--blue-bright);
     box-shadow: 0 0 10px var(--blue-glow);
+    flex-shrink: 0;
+    margin-top: 5px;
   }
 
   .hero h1 {
     font-family: 'DM Serif Display', serif;
     font-weight: 400;
-    font-size: clamp(44px, 6.5vw, 76px);
-    line-height: 1.05;
-    letter-spacing: -0.015em;
+    font-size: clamp(36px, 5.2vw, 64px);
+    line-height: 1.08;
+    letter-spacing: -0.018em;
     color: var(--ink);
-    margin-bottom: 18px;
+    margin-bottom: 24px;
+    max-width: 880px;
+    margin-left: auto;
+    margin-right: auto;
+    text-wrap: balance;
   }
   .hero h1 em {
     font-style: italic;
     color: var(--blue-bright);
     text-shadow: 0 0 32px var(--blue-glow);
   }
+  .hero h1 .num-pill {
+    font-style: normal;
+    color: var(--blue-bright);
+    background: linear-gradient(180deg, rgba(120,165,255,0.16), rgba(77,140,255,0.04));
+    border: 1px solid rgba(120,165,255,0.45);
+    padding: 2px 14px 4px;
+    border-radius: 14px;
+    box-shadow: 0 0 28px rgba(77,140,255,0.35), inset 0 1px 0 rgba(255,255,255,0.08);
+    text-shadow: 0 0 22px var(--blue-glow);
+    white-space: nowrap;
+    margin: 0 2px;
+  }
+  .hero h1 .pill-mo {
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 0.42em;
+    color: var(--blue-bright);
+    opacity: 0.85;
+    letter-spacing: 0.04em;
+    margin-left: 4px;
+    vertical-align: 0.28em;
+    text-shadow: none;
+  }
 
   .hero-sub {
     font-size: clamp(17px, 2vw, 19px);
     color: var(--ink-soft);
-    max-width: 600px;
+    max-width: 640px;
     margin: 0 auto 38px;
-    line-height: 1.6;
+    line-height: 1.65;
+    text-wrap: pretty;
   }
   .hero-sub strong { color: var(--ink); font-weight: 600; }
 
@@ -232,34 +264,101 @@
 
   /* HERO PROOF (numbers under CTA) */
   .hero-proof {
-    margin-top: 64px;
+    margin-top: 72px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 0;
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
+    gap: 16px;
   }
   .hero-proof .item {
-    padding: 28px 16px;
+    position: relative;
+    padding: 34px 22px 28px;
     text-align: center;
-    border-right: 1px solid var(--border);
+    border-radius: 18px;
+    background:
+      radial-gradient(ellipse 90% 60% at 50% 0%, rgba(77,140,255,0.12), transparent 65%),
+      linear-gradient(180deg, rgba(77,140,255,0.04), rgba(77,140,255,0.01));
+    border: 1px solid transparent;
+    background-clip: padding-box;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
-  .hero-proof .item:last-child { border-right: none; }
+  .hero-proof .item::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 18px;
+    padding: 1px;
+    background: linear-gradient(180deg, rgba(120,165,255,0.5), rgba(120,165,255,0.08) 45%, rgba(120,165,255,0.04) 70%, rgba(120,165,255,0.25));
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+            mask-composite: exclude;
+    pointer-events: none;
+  }
+  .hero-proof .item::after {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: 22%;
+    right: 22%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--blue-bright), transparent);
+    box-shadow: 0 0 14px var(--blue-glow);
+    opacity: 0.75;
+  }
+  .hero-proof .item:hover {
+    transform: translateY(-3px);
+  }
+  .hp-icon {
+    width: 44px;
+    height: 44px;
+    margin: 0 auto 16px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 50% 30%, rgba(120,165,255,0.25), rgba(77,140,255,0.05) 70%);
+    border: 1px solid rgba(120,165,255,0.4);
+    display: grid;
+    place-items: center;
+    color: var(--blue-bright);
+    box-shadow:
+      0 0 22px rgba(77,140,255,0.3),
+      inset 0 0 12px rgba(77,140,255,0.08),
+      inset 0 1px 0 rgba(255,255,255,0.1);
+    position: relative;
+    z-index: 1;
+  }
+  .hp-icon svg { width: 20px; height: 20px; stroke: currentColor; }
   .hero-proof .num {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 48px;
+    font-size: 64px;
     line-height: 1;
     color: var(--blue-bright);
-    text-shadow: 0 0 24px var(--blue-glow);
-    margin-bottom: 8px;
+    text-shadow: 0 0 28px var(--blue-glow), 0 0 60px rgba(77,140,255,0.25);
+    margin-bottom: 0;
     letter-spacing: 0.02em;
+    font-variant-numeric: tabular-nums;
+    position: relative;
+    z-index: 1;
   }
+  .hp-bar {
+    width: 36px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--blue-bright), transparent);
+    margin: 14px auto 14px;
+    border-radius: 2px;
+    box-shadow: 0 0 10px var(--blue-glow);
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 0.9s cubic-bezier(.22,.61,.36,1) 0.3s;
+  }
+  .hero-proof .item.in-view .hp-bar { transform: scaleX(1); }
   .hero-proof .lbl {
     font-size: 12px;
-    color: var(--ink-mute);
-    letter-spacing: 0.1em;
+    color: var(--ink-soft);
+    letter-spacing: 0.12em;
     text-transform: uppercase;
-    line-height: 1.4;
+    line-height: 1.55;
+    font-weight: 500;
+    position: relative;
+    z-index: 1;
   }
 
   /* SECTION */
@@ -426,6 +525,33 @@
     display: flex;
     flex-direction: column;
     gap: 18px;
+    position: relative;
+  }
+  .phases::before {
+    content: '';
+    position: absolute;
+    left: 54px;
+    top: 38px;
+    bottom: 38px;
+    width: 2px;
+    background: linear-gradient(to bottom, transparent 0%, rgba(120,150,220,0.22) 6%, rgba(120,150,220,0.22) 94%, transparent 100%);
+    pointer-events: none;
+  }
+  .phases::after {
+    content: '';
+    position: absolute;
+    left: 53px;
+    top: 38px;
+    width: 4px;
+    height: var(--phase-fill, 0px);
+    background: linear-gradient(to bottom, var(--blue-bright), rgba(77,140,255,0.55));
+    box-shadow: 0 0 14px var(--blue-glow), 0 0 32px rgba(77,140,255,0.4);
+    border-radius: 2px;
+    transition: height 0.55s cubic-bezier(.22,.61,.36,1);
+    pointer-events: none;
+  }
+  .phase {
+    position: relative;
   }
   .phase {
     display: grid;
@@ -433,6 +559,44 @@
     gap: 28px;
     align-items: flex-start;
   }
+  .phase-dot {
+    position: absolute;
+    left: 46px;
+    top: 30px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--bg);
+    border: 2px solid rgba(120,150,220,0.4);
+    z-index: 2;
+    transition: border-color 0.4s, box-shadow 0.4s, transform 0.4s;
+  }
+  .phase-dot::after {
+    content: '';
+    position: absolute;
+    inset: 3px;
+    border-radius: 50%;
+    background: transparent;
+    transition: background 0.4s, box-shadow 0.4s;
+  }
+  .phase.active .phase-dot {
+    border-color: var(--blue-bright);
+    box-shadow: 0 0 16px var(--blue-glow), 0 0 36px rgba(77,140,255,0.5);
+    transform: scale(1.08);
+  }
+  .phase.active .phase-dot::after {
+    background: var(--blue-bright);
+    box-shadow: 0 0 10px var(--blue-glow);
+  }
+  .phase.active .glow-card {
+    transform: translateY(-1px);
+  }
+  .phase.active .phase-num,
+  .phase.active .phase-num .big {
+    color: var(--blue-bright);
+    text-shadow: 0 0 22px var(--blue-glow);
+  }
+  .phase .glow-card { transition: transform 0.4s; }
   .phase-num {
     font-family: 'Bebas Neue', sans-serif;
     color: var(--blue-bright);
@@ -449,6 +613,7 @@
     text-shadow: none;
     letter-spacing: 0.02em;
     margin-bottom: 6px;
+    transition: color 0.4s, text-shadow 0.4s;
   }
   .phase-card-head {
     display: flex;
@@ -538,8 +703,22 @@
     left: 9px;
     top: 12px;
     bottom: 12px;
-    width: 1px;
-    background: linear-gradient(to bottom, var(--blue-bright), rgba(77,140,255,0.4) 50%, transparent);
+    width: 2px;
+    background: linear-gradient(to bottom, transparent 0%, rgba(120,150,220,0.22) 6%, rgba(120,150,220,0.22) 94%, transparent 100%);
+    pointer-events: none;
+  }
+  .timeline::after {
+    content: '';
+    position: absolute;
+    left: 8px;
+    top: 12px;
+    width: 4px;
+    height: var(--tl-fill, 0px);
+    background: linear-gradient(to bottom, var(--blue-bright), rgba(77,140,255,0.55));
+    box-shadow: 0 0 14px var(--blue-glow), 0 0 32px rgba(77,140,255,0.35);
+    border-radius: 2px;
+    transition: height 0.55s cubic-bezier(.22,.61,.36,1);
+    pointer-events: none;
   }
   .tl-item {
     position: relative;
@@ -554,16 +733,32 @@
     height: 18px;
     border-radius: 50%;
     background: var(--bg);
-    border: 2px solid var(--blue-bright);
-    box-shadow: 0 0 14px var(--blue-glow);
+    border: 2px solid rgba(120,150,220,0.4);
+    box-shadow: none;
+    z-index: 2;
+    transition: border-color 0.4s, box-shadow 0.4s, transform 0.4s;
   }
   .tl-dot::after {
     content: '';
     position: absolute;
     inset: 4px;
     border-radius: 50%;
+    background: transparent;
+    transition: background 0.4s, box-shadow 0.4s;
+  }
+  .tl-item.active .tl-dot {
+    border-color: var(--blue-bright);
+    box-shadow: 0 0 16px var(--blue-glow), 0 0 36px rgba(77,140,255,0.45);
+    transform: scale(1.12);
+  }
+  .tl-item.active .tl-dot::after {
     background: var(--blue-bright);
     box-shadow: 0 0 8px var(--blue-glow);
+  }
+  .tl-item.active .tl-label {
+    color: #b4d0ff;
+    text-shadow: 0 0 20px var(--blue-glow);
+    transition: color 0.4s, text-shadow 0.4s;
   }
   .tl-label {
     font-family: 'Bebas Neue', sans-serif;
@@ -846,6 +1041,8 @@
   /* RESPONSIVE */
   @media (max-width: 720px) {
     .deliverables-grid { grid-template-columns: 1fr; }
+    .phases::before, .phases::after { display: none; }
+    .phase-dot { display: none; }
     .phase { grid-template-columns: 1fr; gap: 14px; }
     .phase-num { padding-top: 0; }
     .phase-num .big { font-size: 38px; display: inline-block; margin-right: 12px; margin-bottom: 0; }
@@ -853,9 +1050,10 @@
     .guarantee-wrap { padding: 44px 24px; }
     .pullquote { padding: 28px 24px; }
     .hero-proof { grid-template-columns: 1fr; }
-    .hero-proof .item { border-right: none; border-bottom: 1px solid var(--border); }
-    .hero-proof .item:last-child { border-bottom: none; }
     .section { padding: 72px 0; }
+    .eyebrow { font-size: 10px; letter-spacing: 0.18em; gap: 8px; }
+    .eyebrow .dot { margin-top: 4px; }
+    .hero h1 .pill-mo { font-size: 0.4em; vertical-align: 0.3em; }
   }
 </style>
 </head>
@@ -867,24 +1065,47 @@
 <section class="hero">
   <div class="container">
     <span class="eyebrow"><span class="dot"></span>For Coaches Doing $5k to $50k / Month</span>
-    <h1>Stop <em>Chasing.</em><br>Start <em>Closing.</em></h1>
-    <p class="hero-sub">We fill your calendar with qualified buyers who are already looking for what you sell. Your offer converts. Your results are real. <strong>The only problem? Not enough of the right people are seeing it.</strong> We fix that, in 21 days or less.</p>
+    <h1>We fill your calendar with <span class="num-pill">15&ndash;20<span class="pill-mo">/mo</span></span> <em>qualified buyers</em> who are already looking for what you sell.</h1>
+    <p class="hero-sub">Your offer converts. Your results are real. <strong>The only problem? Not enough of the right people are seeing it.</strong> We fix that, in 21 days or less.</p>
     <div class="cta-block">
       <a href="#apply" class="btn-primary">Claim Your Free Strategy Call <span class="arrow">→</span></a>
       <span class="cta-micro">No pitch. No BS. Real pipeline strategy on the call.</span>
     </div>
 
     <div class="hero-proof">
-      <div class="item">
-        <div class="num">20+</div>
-        <div class="lbl">Qualified conversations<br>guaranteed in 30 days</div>
+      <div class="item" data-count="20" data-suffix="+">
+        <div class="hp-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="5" width="18" height="16" rx="2"/>
+            <path d="M3 9 H21"/>
+            <path d="M8 3 V7"/>
+            <path d="M16 3 V7"/>
+            <path d="M9 14 l2 2 l4 -4"/>
+          </svg>
+        </div>
+        <div class="num"><span class="hp-count">0</span><span class="hp-suffix">+</span></div>
+        <div class="hp-bar"></div>
+        <div class="lbl">Booked calls<br>guaranteed in 30 days</div>
       </div>
-      <div class="item">
-        <div class="num">3–5</div>
+      <div class="item" data-count="5" data-prefix="3–">
+        <div class="hp-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M13 3 L4 14 H11 L10 21 L20 9 H13 Z"/>
+          </svg>
+        </div>
+        <div class="num"><span class="hp-prefix">3–</span><span class="hp-count">0</span></div>
+        <div class="hp-bar"></div>
         <div class="lbl">Days to full system<br>setup and activation</div>
       </div>
-      <div class="item">
-        <div class="num">21</div>
+      <div class="item" data-count="21">
+        <div class="hp-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="9"/>
+            <path d="M12 7 V12 L15.5 14"/>
+          </svg>
+        </div>
+        <div class="num"><span class="hp-count">0</span></div>
+        <div class="hp-bar"></div>
         <div class="lbl">Days to first<br>qualified booked calls</div>
       </div>
     </div>
@@ -946,11 +1167,13 @@
     <div class="section-head">
       <span class="eyebrow"><span class="dot"></span>The Method</span>
       <h2>The <em>One Thing</em><br>That Changes Everything</h2>
-      <p class="section-intro">Most outreach fails because it targets cold, uninterested people. Our approach is different: we target buyers who are <em style="color:var(--blue-bright); font-style:italic;">already showing intent</em>, engaging with competitors in your niche, actively looking for a solution like yours. We just make sure they hear from <em style="color:var(--blue-bright); font-style:italic;">you</em> first. This is the <strong style="color:var(--ink); font-weight:600;">Intent Signal Framework™</strong>, the only system built specifically to turn competitor audiences into your qualified pipeline.</p>
+      <p class="section-intro">Most outreach fails because it targets cold, uninterested people. Our approach is different: we target buyers who are <em style="color:var(--blue-bright); font-style:italic;">already showing intent</em>, engaging with competitors in your niche, actively looking for a solution like yours. We just make sure they hear from <em style="color:var(--blue-bright); font-style:italic;">you</em> first.</p>
+      <p class="section-intro" style="margin-top: 22px;">This is the <strong style="color:var(--ink); font-weight:600;">Intent Signal Framework&trade;</strong>, the only system built specifically to turn competitor audiences into your qualified pipeline.</p>
     </div>
 
     <div class="phases">
       <div class="phase">
+        <span class="phase-dot"></span>
         <div class="phase-num"><span class="big">01</span>PHASE</div>
         <div class="glow-card">
           <div class="phase-card-head">
@@ -967,6 +1190,7 @@
       </div>
 
       <div class="phase">
+        <span class="phase-dot"></span>
         <div class="phase-num"><span class="big">02</span>PHASE</div>
         <div class="glow-card">
           <div class="phase-card-head">
@@ -983,6 +1207,7 @@
       </div>
 
       <div class="phase">
+        <span class="phase-dot"></span>
         <div class="phase-num"><span class="big">03</span>PHASE</div>
         <div class="glow-card">
           <div class="phase-card-head">
@@ -999,6 +1224,7 @@
       </div>
 
       <div class="phase">
+        <span class="phase-dot"></span>
         <div class="phase-num"><span class="big">04</span>PHASE</div>
         <div class="glow-card">
           <div class="phase-card-head">
@@ -1031,7 +1257,7 @@
       <div class="deliverable"><span class="check">✓</span>Warm lead sourcing</div>
       <div class="deliverable"><span class="check">✓</span>Competitor audience extraction</div>
       <div class="deliverable"><span class="check">✓</span>CRM updates &amp; tracking</div>
-      <div class="deliverable"><span class="check">✓</span>Qualified conversations</div>
+      <div class="deliverable"><span class="check">✓</span>Booked calls</div>
       <div class="deliverable"><span class="check">✓</span>Booked appointments</div>
       <div class="deliverable"><span class="check">✓</span>Weekly optimization reports</div>
       <div class="deliverable"><span class="check">✓</span>Personalized DM scripting</div>
@@ -1063,7 +1289,7 @@
         <div class="tl-item">
           <div class="tl-dot"></div>
           <div class="tl-label">Days 07 – 14</div>
-          <div class="tl-text"><strong>Early Traction.</strong> Qualified conversations increasing. First booked calls generated. System is learning and optimizing.</div>
+          <div class="tl-text"><strong>Early Traction.</strong> Booked calls increasing. First qualified calls on your calendar. System is learning and optimizing.</div>
         </div>
         <div class="tl-item">
           <div class="tl-dot"></div>
@@ -1086,8 +1312,8 @@
         </svg>
       </div>
       <div class="guarantee-label">Our Iron-Clad Guarantee</div>
-      <div class="guarantee-title">Zero Risk. <em>20</em> Conversations.<br><em>30</em> Days.</div>
-      <p class="guarantee-text">"We guarantee 20+ qualified conversations within your first 30 days, or we work completely free until we deliver."</p>
+      <div class="guarantee-title">Zero Risk. <em>20</em> Booked Calls.<br><em>30</em> Days.</div>
+      <p class="guarantee-text">"We guarantee 20+ qualified booked calls within your first 30 days, or we work completely free until we deliver."</p>
     </div>
   </div>
 </section>
@@ -1134,7 +1360,7 @@
       </div>
       <div class="obj-item">
         <div class="obj-q" onclick="toggleObj(this)">"What if I don't get results?" <span class="arrow">+</span></div>
-        <div class="obj-a">That's what the guarantee is for. 20+ qualified conversations in 30 days, or we work free until we do. There's no scenario where you pay and get nothing.</div>
+        <div class="obj-a">That's what the guarantee is for. 20+ qualified booked calls in 30 days, or we work free until we do. There's no scenario where you pay and get nothing.</div>
       </div>
     </div>
   </div>
@@ -1168,6 +1394,106 @@ function toggleObj(el) {
     el.classList.add('open');
   }
 }
+
+/* Scroll-tracked connectors (phases, problem list, timeline) */
+(function(){
+  function setup(groupSel, itemSel, dotSel, fillVar, topOffset, mobileDisable) {
+    const groupEl = document.querySelector(groupSel);
+    if (!groupEl) return null;
+    const items = Array.from(groupEl.querySelectorAll(itemSel));
+    if (!items.length) return null;
+    const dots = items.map(i => i.querySelector(dotSel));
+
+    return function update() {
+      if (mobileDisable && window.matchMedia('(max-width: 720px)').matches) {
+        groupEl.style.setProperty(fillVar, '0px');
+        items.forEach(i => i.classList.remove('active'));
+        return;
+      }
+      const trigger = window.innerHeight * 0.6;
+      const groupTop = groupEl.getBoundingClientRect().top;
+      let lastActiveIdx = -1;
+      items.forEach((item, i) => {
+        const dot = dots[i];
+        if (!dot) return;
+        const rect = dot.getBoundingClientRect();
+        const dotCenter = rect.top + rect.height / 2;
+        if (dotCenter <= trigger) {
+          item.classList.add('active');
+          lastActiveIdx = i;
+        } else {
+          item.classList.remove('active');
+        }
+      });
+      let fillPx = 0;
+      if (lastActiveIdx >= 0) {
+        const dot = dots[lastActiveIdx];
+        const dotRect = dot.getBoundingClientRect();
+        fillPx = (dotRect.top + dotRect.height / 2) - groupTop - topOffset;
+        if (fillPx < 0) fillPx = 0;
+      }
+      groupEl.style.setProperty(fillVar, fillPx + 'px');
+    };
+  }
+
+  const updaters = [
+    setup('.phases',     '.phase',     '.phase-dot', '--phase-fill', 38, true),
+    setup('.timeline',   '.tl-item',   '.tl-dot',    '--tl-fill',    12, false),
+  ].filter(Boolean);
+
+  function updateAll() { updaters.forEach(u => u()); }
+  let ticking = false;
+  function onScroll() {
+    if (!ticking) {
+      requestAnimationFrame(() => { updateAll(); ticking = false; });
+      ticking = true;
+    }
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+  updateAll();
+})();
+
+/* Count-up animation for hero proof stats */
+(function(){
+  const items = document.querySelectorAll('.hero-proof .item');
+  if (!items.length) return;
+
+  function animateCount(item) {
+    if (item.dataset.animated === '1') return;
+    item.dataset.animated = '1';
+    item.classList.add('in-view');
+    const target = parseInt(item.dataset.count, 10) || 0;
+    const countEl = item.querySelector('.hp-count');
+    if (!countEl) return;
+    const duration = 1500;
+    const start = performance.now();
+    function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
+    function tick(now) {
+      const t = Math.min(1, (now - start) / duration);
+      const eased = easeOut(t);
+      const val = Math.round(eased * target);
+      countEl.textContent = val;
+      if (t < 1) requestAnimationFrame(tick);
+      else countEl.textContent = target;
+    }
+    requestAnimationFrame(tick);
+  }
+
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          animateCount(e.target);
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.4 });
+    items.forEach(it => io.observe(it));
+  } else {
+    items.forEach(animateCount);
+  }
+})();
 </script>
 </body>
 </html>
