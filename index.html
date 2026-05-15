@@ -61,16 +61,16 @@
   }
 
   .container {
-    max-width: 920px;
+    max-width: 1080px;
     margin: 0 auto;
-    padding: 0 28px;
+    padding: 0 32px;
     position: relative;
     z-index: 1;
   }
   .container-narrow {
-    max-width: 760px;
+    max-width: 880px;
     margin: 0 auto;
-    padding: 0 28px;
+    padding: 0 32px;
     position: relative;
     z-index: 1;
   }
@@ -169,12 +169,12 @@
   .hero h1 {
     font-family: 'DM Serif Display', serif;
     font-weight: 400;
-    font-size: clamp(36px, 5.2vw, 64px);
+    font-size: clamp(32px, 4vw, 52px);
     line-height: 1.08;
     letter-spacing: -0.018em;
     color: var(--ink);
     margin-bottom: 24px;
-    max-width: 1180px;
+    max-width: 1200px;
     margin-left: auto;
     margin-right: auto;
     text-wrap: balance;
@@ -210,9 +210,9 @@
   }
 
   .hero-sub {
-    font-size: clamp(17px, 2vw, 19px);
+    font-size: clamp(17px, 1.4vw, 20px);
     color: var(--ink-soft);
-    max-width: 640px;
+    max-width: 680px;
     margin: 0 auto 38px;
     line-height: 1.65;
     text-wrap: pretty;
@@ -263,23 +263,23 @@
   }
 
   /* HERO container widens for the big headline */
-  .hero .container { max-width: 1180px; }
+  .hero .container { max-width: 1240px; }
 
   /* HERO PROOF (numbers under CTA) */
   .hero-proof {
-    margin-top: 72px;
+    margin-top: 64px;
     margin-left: auto;
     margin-right: auto;
-    max-width: 880px;
+    max-width: 820px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 14px;
+    gap: 12px;
   }
   .hero-proof .item {
     position: relative;
-    padding: 24px 18px 22px;
+    padding: 20px 16px 18px;
     text-align: center;
-    border-radius: 16px;
+    border-radius: 14px;
     background:
       radial-gradient(ellipse 90% 60% at 50% 0%, rgba(77,140,255,0.12), transparent 65%),
       linear-gradient(180deg, rgba(77,140,255,0.04), rgba(77,140,255,0.01));
@@ -292,7 +292,7 @@
     content: '';
     position: absolute;
     inset: 0;
-    border-radius: 16px;
+    border-radius: 14px;
     padding: 1px;
     background: linear-gradient(180deg, rgba(120,165,255,0.5), rgba(120,165,255,0.08) 45%, rgba(120,165,255,0.04) 70%, rgba(120,165,255,0.25));
     -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
@@ -315,9 +315,9 @@
     transform: translateY(-3px);
   }
   .hp-icon {
-    width: 36px;
-    height: 36px;
-    margin: 0 auto 10px;
+    width: 30px;
+    height: 30px;
+    margin: 0 auto 8px;
     border-radius: 50%;
     background: radial-gradient(circle at 50% 30%, rgba(120,165,255,0.25), rgba(77,140,255,0.05) 70%);
     border: 1px solid rgba(120,165,255,0.4);
@@ -325,19 +325,19 @@
     place-items: center;
     color: var(--blue-bright);
     box-shadow:
-      0 0 18px rgba(77,140,255,0.28),
-      inset 0 0 10px rgba(77,140,255,0.08),
+      0 0 14px rgba(77,140,255,0.28),
+      inset 0 0 8px rgba(77,140,255,0.08),
       inset 0 1px 0 rgba(255,255,255,0.1);
     position: relative;
     z-index: 1;
   }
-  .hp-icon svg { width: 16px; height: 16px; stroke: currentColor; }
+  .hp-icon svg { width: 13px; height: 13px; stroke: currentColor; }
   .hero-proof .num {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 48px;
+    font-size: 38px;
     line-height: 1;
     color: var(--blue-bright);
-    text-shadow: 0 0 24px var(--blue-glow), 0 0 50px rgba(77,140,255,0.22);
+    text-shadow: 0 0 20px var(--blue-glow), 0 0 40px rgba(77,140,255,0.2);
     margin-bottom: 0;
     letter-spacing: 0.02em;
     font-variant-numeric: tabular-nums;
@@ -345,10 +345,10 @@
     z-index: 1;
   }
   .hp-bar {
-    width: 28px;
+    width: 22px;
     height: 2px;
     background: linear-gradient(90deg, transparent, var(--blue-bright), transparent);
-    margin: 10px auto 10px;
+    margin: 8px auto 8px;
     border-radius: 2px;
     box-shadow: 0 0 8px var(--blue-glow);
     transform: scaleX(0);
@@ -357,9 +357,9 @@
   }
   .hero-proof .item.in-view .hp-bar { transform: scaleX(1); }
   .hero-proof .lbl {
-    font-size: 11px;
+    font-size: 10.5px;
     color: var(--ink-soft);
-    letter-spacing: 0.12em;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
     line-height: 1.5;
     font-weight: 500;
@@ -1046,6 +1046,7 @@
 
   /* RESPONSIVE */
   @media (max-width: 720px) {
+    .container, .container-narrow { padding: 0 20px; }
     .deliverables-grid { grid-template-columns: 1fr; }
     .phases::before, .phases::after { display: none; }
     .phase-dot { display: none; }
@@ -1053,13 +1054,42 @@
     .phase-num { padding-top: 0; }
     .phase-num .big { font-size: 38px; display: inline-block; margin-right: 12px; margin-bottom: 0; }
     .glow-card { padding: 26px 22px; }
-    .guarantee-wrap { padding: 44px 24px; }
-    .pullquote { padding: 28px 24px; }
-    .hero-proof { grid-template-columns: 1fr; }
+    .guarantee-wrap { padding: 44px 22px; }
+    .pullquote { padding: 28px 22px; }
     .section { padding: 72px 0; }
-    .eyebrow { font-size: 10px; letter-spacing: 0.18em; gap: 8px; }
-    .eyebrow .dot { margin-top: 4px; }
+    .hero { padding: 44px 0 64px; }
+    .hero h1 { font-size: clamp(30px, 8.5vw, 40px); }
     .hero h1 .pill-mo { font-size: 0.4em; vertical-align: 0.3em; }
+    .hero h1 .num-pill { padding: 1px 10px 3px; border-radius: 12px; }
+    .hero-sub { font-size: 15px; max-width: 100%; margin-bottom: 30px; }
+    .btn-primary { padding: 15px 28px; font-size: 14px; width: 100%; max-width: 360px; justify-content: center; }
+    .cta-micro { font-size: 11px; }
+    .eyebrow { font-size: 10px; letter-spacing: 0.18em; gap: 8px; margin-bottom: 22px; }
+    .eyebrow .dot { margin-top: 4px; }
+
+    /* Hero proof: keep 3 columns but compact */
+    .hero-proof { grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 48px; max-width: 100%; }
+    .hero-proof .item { padding: 14px 8px 12px; border-radius: 12px; }
+    .hero-proof .item::before { border-radius: 12px; }
+    .hp-icon { width: 26px; height: 26px; margin-bottom: 6px; }
+    .hp-icon svg { width: 12px; height: 12px; }
+    .hero-proof .num { font-size: 28px; }
+    .hp-bar { width: 18px; margin: 6px auto; }
+    .hero-proof .lbl { font-size: 9px; letter-spacing: 0.08em; line-height: 1.4; }
+
+    h2 { font-size: clamp(28px, 7vw, 38px); }
+    .section-intro { font-size: 15.5px; }
+    .topbar { font-size: 10.5px; letter-spacing: 0.12em; padding: 10px 16px; }
+
+    /* Timeline: tighten left padding */
+    .timeline { padding-left: 32px; }
+    .tl-dot { left: -32px; width: 16px; height: 16px; }
+
+    /* Deliverables */
+    .deliverable { padding: 16px 18px; font-size: 14.5px; }
+
+    /* Final CTA */
+    .final-cta { padding: 72px 0 56px; }
   }
 </style>
 </head>
